@@ -1,0 +1,19 @@
+.container {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center {
+    width: 250px;
+    height: 150px;
+    position: absolute;
+  }
+
+  
