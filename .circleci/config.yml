@@ -1,0 +1,49 @@
+version: 2.1
+jobs:
+  build_and_test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: make install
+      - run: make lint
+      - run: make build
+      - run: make test
+  publish:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+      - run:
+          name: Docker login
+          command: make docker_login
+      - run:
+          name: Docker build
+          command: make docker_build
+      - run:
+          name: Docker push
+          command: make docker_push
+  deploy:
+    docker:
+      - image: circleci/node:15.2.1
+    steps:
+      - checkout
+      - run: make deploy
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_and_test:
+          context: onboarding
+      - publish:
+          context: onboarding
+          requires:
+            - build_and_test
+      - deploy:
+          context: onboarding
+          requires:
+            - publish
