@@ -1,15 +1,15 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import Button from "../components/Button/Button";
+import React from 'react';
+import { shallow } from 'enzyme';
+import Container from '../components/Container/Container';
 
-describe("Quotes generator", () => {
-  it("should call `onButtonClick` callback", () => {
-    const onButtonClickMock = jest.fn()
+describe('button', () => {
+  const component = shallow(<Container />);
 
-  render(
-    <Button onButtonClick={onButtonClickMock} />
-  )
+  it('should render 1st button', () => {
+    expect(component.find('button').at(0)).toBeTruthy();
+  });
 
-  fireEvent.click(screen.getByTestId("button"));
-  expect(onButtonClickMock).toHaveBeenCalled()
-  })
-})
+  it('should be able to click the first button', () => {
+    component.find('button').at(0).simulate('click');
+  });
+});

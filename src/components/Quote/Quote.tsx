@@ -1,22 +1,20 @@
 import React from 'react';
 import { ParsedQuote } from '../../utils/interfaces';
-import "./Quote.scss"
+import './Quote.scss';
 
 interface QuoteProps {
-    quote: ParsedQuote;
+  quote: ParsedQuote;
 }
 
-const Quote = ({quote}: QuoteProps) => {
-    
-const { author, text } = quote;
+function Quote({ quote }: QuoteProps) {
+  const { author, text } = quote;
 
-return (
+  return (
     <div className="text">
-        <h3 className="heading">{author}</h3>
-        <p className="quotes"><em>{text}</em></p>
+      <h4 className="heading">{author}</h4>
+      <p className="quotes"><em>{text}</em></p>
     </div>
-)
-
+  );
 }
 
 export default Quote;

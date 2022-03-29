@@ -1,13 +1,15 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import "./Header.scss"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import './Header.scss';
 
-const Header = () => {
-
+function Header() {
   return (
-    <h1> Generate a random quote! <FontAwesomeIcon icon="bolt-lightning" size="2x" /></h1>
-  )
-
+    <h1>
+      {' '}
+      Generate a random quote!
+      <FontAwesomeIcon icon="bolt-lightning" size="2x" />
+    </h1>
+  );
 }
 
 export default Header;

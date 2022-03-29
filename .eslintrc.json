@@ -1,0 +1,45 @@
+{
+    "extends": [
+      "airbnb",
+      "airbnb-typescript",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": ["react", "@typescript-eslint", "jest"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "rules":{
+      "import/prefer-default-export": 0,
+      "react/prop-types": 0,
+      "react/require-default-props": 0,
+      "object-curly-newline": 1,
+      "@typescript-eslint/semi": 1,
+      "@typescript-eslint/object-curly-spacing": 1,
+      "object-property-newline": 2,
+      "react/jsx-uses-react": 0,
+      "react/react-in-jsx-scope": 0,
+      "no-unused-vars": ["error", { "args": "none" }]
+    },
+    "overrides": [
+      {
+        "files": ["**/*.spec.js", "**/*.spec.jsx", "**/*.test.js", "**/*.test.jsx"],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  }
+  

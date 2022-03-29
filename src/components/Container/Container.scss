@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 .container {
     width: 400px;
     height: 400px;
@@ -14,6 +16,18 @@
     width: 250px;
     height: 150px;
     position: absolute;
+  }
+
+.quoteBtn {
+    width: 250px;
+    height: 100px;
+    cursor: pointer;
+    background-color: #b7b7a4;
+    border:  10px solid #eb5e28;
+    outline: none;
+    transition: 1s ease-in-out;
+    font-family: 'Pacifico';
+    font-size: 30px;
   }
 
   
