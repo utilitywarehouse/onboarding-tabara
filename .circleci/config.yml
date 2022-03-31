@@ -1,17 +1,24 @@
 version: 2.1
+
+orbs:
+  node: circleci/node@5.0.0
+
 jobs:
-  build_and_test:
+  build-and-test:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:17.4.0
     steps:
       - checkout
-      - run: make install
-      - run: make lint
-      - run: make build
-      - run: make test
-  publish:
+      - node/install-packages
+      - run:
+          name: Run lint and tests
+          command: make lint run-tests
+      - run:
+          name: Build prod version
+          command: make build
+  dockerize-and-kubernetize:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:17.4.0
     steps:
       - checkout
       - setup_remote_docker:
@@ -19,31 +26,23 @@ jobs:
           docker_layer_caching: true
       - run:
           name: Docker login
-          command: make docker_login
+          command: make docker-login
       - run:
           name: Docker build
-          command: make docker_build
+          command: make docker-build
       - run:
           name: Docker push
-          command: make docker_push
-  deploy:
-    docker:
-      - image: circleci/node:15.2.1
-    steps:
-      - checkout
-      - run: make deploy
+          command: make docker-push
+      - run:
+          name: Kubernetes deploy
+          command: make deploy
 
 workflows:
   version: 2
-  build:
+  full:
     jobs:
-      - build_and_test:
-          context: onboarding
-      - publish:
-          context: onboarding
+      - build-and-test
+      - dockerize-and-kubernetize:
           requires:
-            - build_and_test
-      - deploy:
-          context: onboarding
-          requires:
-            - publish
+            - build-and-test
+          context: onboarding 

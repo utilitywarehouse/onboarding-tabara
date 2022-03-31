@@ -8,15 +8,15 @@ install:
 
 .PHONY: lint
 lint:
-	yarn lint
+	yarn run lint
 
 .PHONY: build
 build:
-	yarn build
+	yarn run build
 
 .PHONY: test
 test:
-	yarn test
+	yarn run test
 
 docker_login:
 	docker login -u $(NAMESPACE) -p $(UW_DOCKER_PASS) $(REGISTRY)
