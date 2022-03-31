@@ -9,7 +9,8 @@ jobs:
       - image: cimg/node:17.4.0
     steps:
       - checkout
-      - node/install-packages
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           name: Run lint and tests
           command: make lint run-tests
