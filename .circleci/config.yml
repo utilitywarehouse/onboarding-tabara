@@ -12,8 +12,11 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          name: Run lint and tests
-          command: make lint run-tests
+          name: Run lint
+          command: make lint 
+      - run:
+          name: Run test
+          command: make test
       - run:
           name: Build prod version
           command: make build
