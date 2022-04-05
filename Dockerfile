@@ -7,9 +7,9 @@ RUN yarn run lint
 RUN yarn run build
 RUN yarn run test
 
-FROM build
-COPY --from=build /app/src ./src
-COPY --from=build /app/node_modules ./node_modules
+FROM dist
+COPY --from=dist /app/src ./src
+COPY --from=dist /app/node_modules ./node_modules
 ENV NODE_ENV=production
 EXPOSE 8080
-CMD ["make", "all"]
+CMD [ "node", "./dist/server.js" ]
