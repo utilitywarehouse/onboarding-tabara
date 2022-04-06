@@ -45,8 +45,8 @@ workflows:
   version: 2
   full:
     jobs:
-      - build-and-test
+      - build_and_test
       - dockerize-and-kubernetize:
           requires:
-            - build-and-test
+            - build_and_test
           context: onboarding 
