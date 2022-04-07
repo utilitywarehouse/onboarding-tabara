@@ -5,7 +5,6 @@ RUN yarn install
 COPY . .
 RUN yarn run lint
 RUN yarn run build
-RUN yarn run test
 
 FROM build
 COPY --from=build /app/src ./src
