@@ -1,11 +1,15 @@
 FROM node:latest as build
 WORKDIR /app
 COPY package.json ./
-RUN npm install
+RUN yarn install
 COPY . .
-CMD ["make", "all"]
+RUN yarn run lint
+RUN yarn run build
+RUN yarn run test
 
-FROM nginx:alpine
-COPY --from=build /app/dist ./app/static/dist
-COPY --from=build /app/index.html ./app/static/index.html
-COPY --from=build /app/nginx.conf /etc/nginx/nginx.conf
+FROM build
+COPY --from=build /app/src ./src
+COPY --from=build /app/node_modules ./node_modules
+ENV NODE_ENV=production
+EXPOSE 8080
+CMD ["make", "all"]
